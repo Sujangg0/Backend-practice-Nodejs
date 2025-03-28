@@ -4,6 +4,9 @@
 import express from 'express';  // Newer way 
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import authRoutes from './routes/authRoutes.js' 
+import todoRoutes from './routes/TodoRoutes.js'
+
 
 const app = express();
 const PORT = process.env.PORT || 5000
@@ -25,6 +28,14 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 });
+
+
+// Router
+app.use('/auth', authRoutes)
+app.use('/todos', todoRoutes)
+
+
+
 
 
 app.listen(PORT, () => {

@@ -1,5 +1,5 @@
-import { DatabaseSync } from 'node:sqlite'
-const db = new DatabaseSync(':memory:')
+import Database from 'better-sqlite3'
+const db = new Database(':memory:')
 
 // Execute SQL statements from strings
 db.exec(`
