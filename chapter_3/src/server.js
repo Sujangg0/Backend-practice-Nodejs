@@ -4,9 +4,12 @@
 import express from 'express';  // Newer way 
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js' 
 import todoRoutes from './routes/TodoRoutes.js'
+import authMiddleware from './middleware/authMiddleware.js';
 
+dotenv.config()     // enable the reading from .env file
 
 const app = express();
 const PORT = process.env.PORT || 5000
@@ -32,7 +35,7 @@ app.get('/', (req, res) => {
 
 // Router
 app.use('/auth', authRoutes)
-app.use('/todos', todoRoutes)
+app.use('/todos', authMiddleware, todoRoutes)
 
 
 
